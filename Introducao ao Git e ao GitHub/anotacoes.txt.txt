@@ -1,5 +1,5 @@
 
-GIT E GITHUB
+ANOTACOES DE GIT E GITHUB:
 
 exemplo: analogia de um codigo com o refinamento de um artigo, procurando sempre otimizar o conteudo
 traz a ideia de que um codigo é uma estrutura que está interligada a diversos arquivos 
