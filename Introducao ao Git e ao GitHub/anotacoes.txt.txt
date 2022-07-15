@@ -1,28 +1,25 @@
 
 ANOTACOES DE GIT E GITHUB:
 
-exemplo: analogia de um codigo com o refinamento de um artigo, procurando sempre otimizar o conteudo
-traz a ideia de que um codigo é uma estrutura que está interligada a diversos arquivos 
+GIT => sistema de versionamento de codigo distribuido, criado por Linus Torvalds 
 
-GIT => sistema de versionamento de codigo distribuido, criado por Linux Torvalds 
+=> Software é um sistema COLABORATIVO, assim como o Linus escreveu o GIT por meio de um trabalho de colaboracao
+=> A ideia do git é trazer um software que solucione a ideia de editar diversas versoes do mesmo codigo em maquinas distintas 
+=> o GIT versiona o codigo enquanto o GITHUB armazena
+=> GIT E GITHUB SAO COISAS DISTINTAS (porem sao complementares)
 
-**software é um sistema COLABORATIVO, assim como o Linus escreveu o GIT por meio de um trabalho de colaboracao
-
-a ideia do git é trazer um software que solucione a ideia de editar diversas versoes do mesmo codigo em diversas maquinas diferentes
-
-**o GIT versiona o codigo enquanto o GITHUB armazena
-**GIT E GITHUB SAO COISAS DISTINTAS (porem sao complementares)
+Conteudo programatico:
 
 1. Controle de versao
 2. Armazenamento em nuvem
 3. Trabalho em quipe 
-4. Melhorar seu codigo
+4. Otimizacao de codigo
 5. Reconhecimento 
 
 GUI x CLI
 
-(o git nao possui uma interface grafica, apenas uma linha de comando)
-Por isso ele é um CLI e nao um GUI (graphic user interface)
+=> O git nao possui uma interface grafica, apenas uma linha de comando
+=> Por isso, ele é um CLI e nao um GUI (graphic user interface)
 
 O que vamos aprender?
 
@@ -31,7 +28,7 @@ O que vamos aprender?
 - Criar pastas/arquivos
 - Deletar pastas/arquivos
 
-Windows   
+Comandos basicos do Windows:   
 
 - cd => possibilita a navegacao entre pastas (change directory)
 - cd .. => retroceder o comando 
@@ -41,32 +38,30 @@ Windows
 - cls (clear screen) => comando para limpar a tela 
 - TAB => auto complete 
 - echo => devolve o que foi digitado
-- rmdir => remover difetorio com todos os arquivos 
+- rmdir => remove diretorio com todos os arquivos 
 
-**flags => complementos desses comandos 
-**DEPRECATED => defazado
+Obs: flags => complementos desses comandos 
+     deprecated => defazado
 
-ENTENDENDO COMO O GIT FUNCIONA POR BAIXO DOS PANOS:
+ENTENDENDO COMO O GIT FUNCIONA "POR BAIXO DOS PANOS":
 
 - SHA1
 - Objetos fundamentais
 - Sistema distribuido
 - Seguranca
 
-A sigla SHA é um algoritmo de encriptacao => pega o arquivo e o embaralha
-A encriptacao gera um conjunto de caracteres de 40 digitos (é unico e serve como um identificador)
+=> A sigla SHA é um algoritmo de encriptacao => pega o arquivo e o embaralha
+=> A encriptacao gera um conjunto de caracteres de 40 digitos (é unico e serve como um identificador)
+=> Forma de identificacao segura e rapida
+=> E uma forma curta de representar o estado de um arquivo
 
-exemplo:
-encriptar um arquivo e utilizar o SHA para gerar um conjunto unico de caractere (identificador)
-forma de identificacao segura e rapida
-é uma forma curta de representar o estado de um arquivo
+Exemplo: encriptar um arquivo e utilizar o SHA para gerar um conjunto unico de caracteres (identificador)
 
-comando para gerar codigo de encriptacao:
-openssl sha1 nomedoarquivo
+Comando para gerar codigo de encriptacao: openssl sha1 nomedoarquivo
 
 Objetos internos do GIT:
 
-1.BLOBS
+1. BLOBS
 2. TREES
 3. COMMITS
 
@@ -83,13 +78,12 @@ exemplo:
 echo 'conteudo' | git hash-object --stdin
 fc31e91b26cf85a55e072476de7f263c89260eb1
 
- echo -e 'blob 9\0conteudo' | openssl sha1
+echo -e 'blob 9\0conteudo' | openssl sha1
 (stdin)= fc31e91b26cf85a55e072476de7f263c89260eb1
 
 RESUMO:
 
-o git armazena metadados em objetos
-portanto, o objeto BLOB contem metadados do GIT 
+=> o git armazena metadados em objetos, portanto o objeto BLOB contem metadados do GIT 
 
 TREES => armazenam blobs
 
@@ -98,103 +92,99 @@ Tree    <tamanho>
 
 blob    sa4d8s    texto.txt
 
-**arvore (trees) => monta a estrutura de onde estao os arquivos
-arvores apontam  para os blobs
-caso haja a alteracao em algum arquivo o sha1 da blob muda e, consequentemente o sha1 da tree tambem se modifica 
-uma virgula pode modificar toda a encriptacao de uma estrutura
-
-trees apontam para blobs e para outras trees tambem
+=> arvore (trees) => monta a estrutura de onde estao os arquivos
+=> arvores apontam  para os blobs
+=> caso haja a alteracao em algum arquivo o sha1 da blob muda e, consequentemente, o sha1 da tree tambem se modifica 
+=> uma virgula pode modificar toda a encriptacao de uma estrutura
+=> trees apontam para blobs e para outras trees tambem
 
 COMMIT => objeto que junta tudo
-aponta para uma arvore, um parente, autor
+
+=> apontam para uma arvore, um parente, autor...
 
 Commit   <tamanho>
  tree
 parente
 autor
-ensagem
+mensagem
 timestamp
 
-os commits tambem geram um sha1
-se uma blob é alterada, um sha1 é gerado modificando os metadas da tree que está interligada a blob 
-o commit aponta para uma tree que aponta para outras arvores e assim sucessivamente
-o commit é unico para cada autor
+=> os commits tambem geram um sha1
+=> se uma blob é alterada, um sha1 é gerado, modificando os metadados da tree que está interligada a blob 
+=> o commit aponta para uma tree que aponta para outras arvores e assim sucessivamente
+=> o commit é unico para cada autor
 
-
-                =>  blob
+                => blob
 commit => tree  => blob
                 => blob
 
-Mas por que o GIR é um sistema distribuido seguro?
+Mas por que o GIT é um sistema distribuido seguro?
 
-o codigo armazenado pode estar hosteado em uma nuvem (como no github), recebendo a contribuicao de varios manteiners (simultaneamente)
-pense desta forma:
-um codigo é administrado por cerca de 40 manteiners 
-em um belo dia, o armazenamento em nuvem do GitHub comeca ter serios problemas
-o que acontecera com este codigo de 40 manteiners?
-ainda existira em varias maquinas diferentes, pois todas as versoes distribuidas deste mesmo codigo sao confiaveis e verídicas 
+=> o codigo armazenado pode estar hosteado em uma nuvem (como no github), recebendo a contribuicao de varios maintainers (simultaneamente)
+
+Pense desta forma:
+
+=> um codigo é administrado por cerca de maintainers
+=> em um belo dia, o armazenamento em nuvem do GitHub comeca a ter serios problemas
+=> o que acontecera com este codigo de 40 maintainers?
+=> ainda existira em varias maquinas diferentes, pois todas as versoes distribuidas deste mesmo codigo sao confiaveis e verídicas 
 
 CHAVES SSH E TOKENS:
 
-autenticacao via senha no github => obsoleta
-necessario utilizar outro tipo de utenticacao no GitHub
-para isso, outros processos devem ser efetuados
+=> autenticacao via senha no github => obsoleta
+=> necessario utilizar outro tipo de autenticacao no GitHub
+=> para isso, outros processos devem ser efetuados
 
-1. Chave SSh:
+1. Chave SSH:
 
-SSH => protocoo que serve para ligar um usuario remoto a um servidor
-a chave privada consegue abrir a chave publica 
-a chave publica é enviada pro servidor (GitHub) e a partir da chave privada dentro da nossa maquina conseguimos abrir a chave publica do servidor e subir o codigo no GitHub
+SSH => protocolo que serve para ligar um usuario remoto a um servidor
+
+=> a chave privada consegue abrir a chave publica 
+=> a chave publica é enviada para o servidor remoto (GitHub) e a partir da chave privada dentro da nossa maquina conseguimos abrir a chave publica do servidor e subir o codigo no GitHub
+
 Importante:
-Deve-se primeiro gerar a chave SSH
-E posteriormente adiciona-la no GitHub
 
-Forma de estabelecer uma conexao segura e encriptada entre duas maquinas
-Conexao entre a maquina do GitHub e a maquina pessoal => ira gerar uma chave SSH
-chave publica => vai estar disponivel no github
-(a partir desta configuracao codigos poderao ser enviados sem que seja necessario a autenticacao via senha
+=> Deve-se primeiro gerar a chave SSH e posteriormente adiciona-la no GitHub
 
-Realizar u processo no Cli => para gerar a chave
+=> Forma de estabelecer uma conexao segura e encriptada entre duas maquinas
+=> Conexao entre a maquina do GitHub e a maquina pessoal => ira gerar uma chave SSH
+=> chave publica => vai estar disponivel no github
+
+ (a partir desta configuracao codigos poderao ser enviados sem que seja necessario a autenticacao via senha)
+ (necessario realizar o processo no CLI para gerar a chave)
 
 Colocar no Git Bash o seguinte comando:
 
 ssh-keygen -t ed25519 -C c.carlaffranchi@gmail.com
-(esse processo irá gerar a chave publica e a chave privada, que ficara armazenada dentro de um arquivo no computador 
+(esse processo irá gerar a chave publica e a chave privada, que ficara armazenada dentro de um arquivo no computador)
 
-Segunda forma de acesso seguro alem da chave SSH => Token de acesso pessoal
+=> Segunda forma de acesso seguro alem da chave SSH => Token de acesso pessoal
 
-INICIANDO O GIT E CRIANDO UM COMMIT 
+INICIANDO O GIT E CRIANDO UM COMMIT:
 
 - git init - iniciar repositorio
 - git add - mover arquivos
-- git comiit - criar commit
+- git commit - criar commit
 
-**chamando pelo termial o git e seus comandos
-**toos os comandos do git possuem o git na frente 
+=> markdown - forma humanizada de escrever HTML (arquivo especial .md)
+=> utiliza estruturas simples para deixar o texto bem organizado, sem necessidade de saber HTML
 
-markdown -> forma humanizada de escrever HTML 
-(arquivo especial .md)
-(utiliza de estruturas simples para deixar o texto bem organizado, sem necessidade de saber HTML)
+CICLO DE VIDA DOS ARQUIVOS DENTRO DO GIT:
 
-CICLO DE VIDA DOS ARQUIVOS DENTRO DO GIT
-
-- git init - alem de criar a pasta .gir ela inicializa um REPOSITORIO
+- git init - alem de criar a pasta .git ela inicializa um REPOSITORIO
 (criacao de um repositorio git dentro de uma pasta)
 
-Tracked or untracked 
+Tracked or untracked:
 
-tracked (rastreaveis) -> unmodified (arq. que nao foi modificado), modified (arquivo que sofreu modificacao) e staged (arquivos que estao se preparando para fazer parte de outro tipo de agrupamento)
-untracked -> arquivo recem criado, git ainda nao sabia da existencia dele
-(a partir do git add ele moveu o arquivo de untracked pra staged)
+=> tracked (rastreaveis) -> unmodified (arq. que nao foi modificado), modified (arquivo que sofreu modificacao) e staged (arquivos que estao se preparando para fazer parte de outro tipo de agrupamento)
+=> untracked -> arquivo recem criado, git ainda nao sabe da existencia dele
 
-A partir da comparacao do arquivo SHA1, um arquivo pode passar de unmodified para modified
-
-Um arquivo pode passar de staged para commit (que é um objeto do git)
-Commit(possui autor, texto, data...)
-o commit retorna os arquivos para unmodified (recomecando o ciclo)
-assim, o commit (com o codigo pronto) cria um snapshot e os arquivos ficam no estado de unmofied, ate que ecebam uma nova modificacao
-
-unmofied, modified e staged sao um ciclo 
+=> A partir da comparacao do arquivo SHA1, um arquivo pode passar de unmodified para modified
+=> Um arquivo pode passar de staged para commit (que é um objeto do git)
+=> Commit (possui autor, texto, data...)
+=> O commit retorna os arquivos para unmodified (recomecando o ciclo)
+=> Assim, o commit (com o codigo pronto) cria um snapshot e os arquivos ficam no estado de unmodified, ate que recebam uma nova modificacao
+=> unmodified, modified e staged sao um ciclo 
 
 O que significa um repositorio?
 
@@ -202,8 +192,8 @@ SERVIDOR -> remote repository
 (fica no servidor)
 
 AMBIENTE DE DESENVOLVIMENTO -> working directory, staging area, local repository
-os arquivos irao sempre alterar entre workink directory e staging area
-quando o arquivo vira um commit ele pode passar a integrar o local repository e o local repository pode ser empurrado parao remote repository
+=> os arquivos irao sempre alterar entre working directory e staging area
+=> quando o arquivo vira um commit ele pode passar a integrar o local repository e o mesmo pode ser empurrado para remote repository
 
 untracked -> staged
 unmodified -> staged
@@ -212,24 +202,19 @@ unmodified -> staged
 staged -> commit
        git commit 
 
-**repositorio local vai ser composto apenas por commits
-
-- git status -> status do repositorio git
-
-**branch master -> apresenta o historico de commits feitos
+=> repositorio local vai ser composto apenas por commits
+=> git status -> status do repositorio git
+=> branch master -> apresenta o historico de commits feitos
 (commits feitos no proprio github e na maquina pessoal)
 
-
-
-
 Passos para comecar a trabalhar com um arquivo recem criado no git bash:
+
 1. utilizar o comando git add para passar um arquivo para staged
 2. criar um commit (git commit)
 
 TRABALHANDO COM O GITHUB:
 
-**inicializar repositorio com README -> arquivos que contam com a funcionalidade de um repositorio, como o markdown
-**na atividade um repositorio local (comitado) foi empurrado para um repositorio remoto (servidor)
+=> inicializar repositorio com README -> arquivos que contam com a funcionalidade de um repositorio, como o markdown
 
 Passo a passo:
 
